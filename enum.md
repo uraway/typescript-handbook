@@ -6,31 +6,31 @@ https://www.typescriptlang.org/docs/handbook/enums.html
 
 ### Enums
 
-Enums では、名前付きの定数群を定義します。(その定数群の)内容を明示したり、それぞれ異なるケースを簡単に作成することができます。TypeScript では、数値ベースと文字列ベースの enums を提供します。
+enums では、名前付きの定数群を定義します。その定数群の内容を明示したり、それぞれ異なるケースを簡単に作成することができます。TypeScript では、数値ベースと文字列ベースの enums を提供しています。
 
 ### Numeric enums
 
-まずは、他の言語でも馴染みのある数値 enums を見ていきましょう。`enum` キーワードを用いて定義します。
+まずは、他の言語でも馴染みのある数値 enums を見ていきます。`enum` キーワードを用いて定義します。
 
 ```typescript
 enum Direction {
-    Up = 1,
-    Down,
-    Left,
-    Right
+  Up = 1,
+  Down,
+  Left,
+  Right
 }
 ```
 
-ここでは、初期値`1`を持つ`Up`を数値 enum を定義しています。それ移行のメンバーは自動的にインクリメントされるので、`Direction.Up`は`1`を、`Down`は`2`を、`Left`は`3`を、`Right`は`4`となります。
+ここでは、初期値`1`を持つ`Up`の数値 enum を定義しています。それ以降のメンバーは自動的にインクリメントされるので、`Direction.Up`は`1`、`Down`は`2`、`Left`は`3`、`Right`は`4`となります。
 
-初期値を省くこともできます。
+また、初期値は省くこともできます。
 
 ```typescript
 enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
+  Up,
+  Down,
+  Left,
+  Right
 }
 ```
 
@@ -40,12 +40,12 @@ enum の利用法はとてもシンプルです。プロパティにアクセス
 
 ```typescript
 enum Response {
-    No = 0,
-    Yes = 1
+  No = 0,
+  Yes = 1
 }
 
 function respond(recipient: string, message: Response): void {
-    // ...
+  // ...
 }
 
 respond("Princess Caroline", Response.Yes);
@@ -55,8 +55,8 @@ respond("Princess Caroline", Response.Yes);
 
 ```typescript
 enum E {
-    A = getSomeValue(),
-    B // エラー! 'A' は定数で初期化されていないため、'B'には初期値が必要
+  A = getSomeValue(),
+  B // エラー! 'A' は定数で初期化されていないため、'B'には初期値が必要
 }
 ```
 
@@ -66,14 +66,14 @@ enum E {
 
 ```typescript
 enum Direction {
-    Up = "UP",
-    Down = "DOWN",
-    Left = "LEFT",
-    Right = "RIGHT"
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT"
 }
 ```
 
-文字列 enum はオートインクリメントしませんが、そのかわりうまく"serialize"することができます。例えばデバッグしていて、数値 enum の実行中の値を読み取ろうとしても、その値自体には意味はない([リバースマッピング](#Enums-at-runtime))ので不明瞭ですが、文字列 enum であれば、実行中の値からもメンバーの名前以上の意味を汲み取れます。
+文字列 enum はオートインクリメントしませんが、そのかわりうまく"serialize"することができます。例えばデバッグで、数値 enum の実行中の値を読み取ろうとしても、その値自体には意味はない([リバースマッピング](#Enums-at-runtime)はしばしば役に立ちますが)ので困難ですが、文字列 enum であれば、実行中の値からもメンバーの名前以上の意味を汲み取れます。
 
 ### Heterogeneous enums
 
@@ -81,8 +81,8 @@ enum Direction {
 
 ```typescript
 enum BooleanLikeHeterogeneousEnum {
-    No = 0,
-    Yes = "YES"
+  No = 0,
+  Yes = "YES"
 }
 ```
 
@@ -92,38 +92,38 @@ JavaScript の実行中のふるまいをうまく利用しようとしている
 
 enum メンバーはそれぞれ定数か計算値を持ちます。次のように定義した場合、enum メンバーは定数を持っているとみなされます。
 
-    - enumの最初のメンバーが初期値を持たない場合
+- enum の最初のメンバーが初期値を持たない場合
 
-0 となります。
+この場合メンバーの値は 0 となります。
 
 ```typescript
 // E.X は定数:
 enum E {
-    X
+  X
 }
 ```
 
-    - 初期値を持たず、かつ一つ前のメンバーが数値定数である場合。
+- 初期値を持たず、かつ一つ前のメンバーが数値定数である場合。
 
-メンバーの値は一つ前のメンバーの値に 1 を足した数値定数となります。
+この場合、メンバーの値は一つ前のメンバーの値に 1 を足した数値定数となります。
 
 ```typescript
 // 'E1' と 'E2' のすべてのメンバーは定数
 
 enum E1 {
-    X,
-    Y,
-    Z
+  X,
+  Y,
+  Z
 }
 
 enum E2 {
-    A = 1,
-    B,
-    C
+  A = 1,
+  B,
+  C
 }
 ```
 
-    - enumメンバーの初期値が定数enum式である場合
+- enum メンバーの初期値が定数 enum 式である場合
 
 定数 enum 式とは、コンパイル時に評価可能な式のことで、次のような場合に当てはまります。
 
@@ -137,23 +137,23 @@ enum E2 {
 
 ```typescript
 enum FileAccess {
-    // 定数メンバー
-    None,
-    Read = 1 << 1,
-    Write = 1 << 2,
-    ReadWrite = Read | Write,
-    // 計算値メンバー
-    G = "123".length
+  // 定数メンバー
+  None,
+  Read = 1 << 1,
+  Write = 1 << 2,
+  ReadWrite = Read | Write,
+  // 計算値メンバー
+  G = "123".length
 }
 ```
 
 ### Union enums and enum member types
 
-特殊な enum メンバーのひとつに、リテラル enum メンバーがあります。リテラル enum メンバーは、初期値を持たないか次のような初期値を持ちます。
+特殊な enum メンバーのひとつに、リテラル enum メンバーがあります。リテラル enum メンバーは、初期値を持たないか、あるいは、次のような初期値を持ちます。
 
--   文字列リテラル (`foo`、`bar`、`baz`など)
--   数値リテラル (`1`、`100`など)
--   マイナスの数値リテラル (`-1`、`-100`など)
+- 文字列リテラル (`foo`、`bar`、`baz`など)
+- 数値リテラル (`1`、`100`など)
+- マイナスの数値リテラル (`-1`、`-100`など)
 
 すべてのメンバーがリテラル enum メンバーであるとき、いくつかの特殊な構文が使用できます。
 
@@ -161,44 +161,44 @@ enum FileAccess {
 
 ```typescript
 enum ShapeKind {
-    Circle,
-    Square
+  Circle,
+  Square
 }
 
 interface Circle {
-    kind: ShapeKind.Circle;
-    radius: number;
+  kind: ShapeKind.Circle;
+  radius: number;
 }
 
 interface Square {
-    kind: ShapeKind.Square;
-    sideLength: number;
+  kind: ShapeKind.Square;
+  sideLength: number;
 }
 
 let c: Circle = {
-    kind: ShapeKind.Square,
-    //    ~~~~~~~~~~~~~~~~ エラー!
-    radius: 100
+  kind: ShapeKind.Square,
+  //    ~~~~~~~~~~~~~~~~ エラー!
+  radius: 100
 };
 ```
 
-もうひとつ、enum 型はそれ自身がメンバーの union 型となります。union 型についてはまだ説明していませんが、union enums では、enum 自身に存在する値の集まりであることを型システムは活用します。これにより、TypeScript は、値を比較するときに起こしがちなささいなバグを防ぐことが可能になります。次の例を見てください。
+また、enum 型はそれ自身がメンバーの union 型となります。union 型についてはまだ説明していませんが、union enums では、enum 自身に存在する値の集まりであること利用するということを知っておいてください。これにより、TypeScript は値を比較するときに起こしがちなささいなバグを防ぐことが可能になります。次の例を見てください。
 
 ```typescript
 enum E {
-    Foo,
-    Bar
+  Foo,
+  Bar
 }
 
 function f(x: E) {
-    if (x !== E.Foo || x !== E.Bar) {
-        //             ~~~~~~~~~~~
-        // エラー! '!=='オペレーターは'E.Foo'と'E.Bar'には適用できない
-    }
+  if (x !== E.Foo || x !== E.Bar) {
+    //             ~~~~~~~~~~~
+    // エラー! '!=='オペレーターは'E.Foo'と'E.Bar'には適用できない
+  }
 }
 ```
 
-この例では、`x`が`E.Foo`ではないかどうかをチェックしています。このチェックがパスすれば、次の`||`はスキップされて、`if`文中が実行されます。しかし、前述のチェックがパスしなかった場合、`x`は`E.Foo`に限定されます。そのため、`x`が`E.Bar`であるかどうかを確認すること無駄だということになります。
+この例では、`x`が`E.Foo`ではないかどうかをチェックしています。このチェックがパスすれば、`||`はスキップされて、`if`文中が実行されます。しかし、前述のチェックがパスしなかった場合、`x`は`E.Foo`に限定されます。そのため、`x`が`E.Bar`であるかどうかを確認することは無駄ということになります。
 
 ### Enums at runtime
 
@@ -206,9 +206,9 @@ enums は実行時にも存在する実オブジェクトです。例えば次�
 
 ```typescript
 enum E {
-    X,
-    Y,
-    Z
+  X,
+  Y,
+  Z
 }
 ```
 
@@ -216,7 +216,7 @@ enum E {
 
 ```typescript
 function f(obj: { X: number }) {
-    return obj.X;
+  return obj.X;
 }
 
 // 'E'は数値のプロパティである'X'を持つため動作する
@@ -225,22 +225,22 @@ f(E);
 
 #### Reverse mappings
 
-メンバーの名前と同じプロパティを持つオブジェクトを作成することに加えて、enum の値から enum の名前に対する reverse mapping も生成します。例えば、次のようなコードは
+enum はメンバーの名前と同じプロパティを持つオブジェクトを作成することに加えて、enum の値からその名前に対する reverse mapping も生成します。例えば、次のようなコードは
 
 ```typescript
 enum Enum {
-    A
+  A
 }
 let a = Enum.A;
 let nameOfA = Enum[a]; // "A"
 ```
 
-TypeScript によって、次のような JavaScript にコンパイルされます。
+次のような JavaScript にコンパイルされます。
 
 ```typescript
 var Enum;
 (function(Enum) {
-    Enum[(Enum["A"] = 0)] = "A";
+  Enum[(Enum["A"] = 0)] = "A";
 })(Enum || (Enum = {}));
 var a = Enum.A;
 var nameOfA = Enum[a]; // "A"
@@ -248,7 +248,7 @@ var nameOfA = Enum[a]; // "A"
 
 生成されたコードからは、enum は順方向(`name` -> `value`)と逆方向(`value` -> `name`)の両方のマッピングを持つオブジェクトにコンパイルされることがわかります。他の enum のメンバーへの参照は常にプロパティアクセスとして出力され、インラインされることはありません。
 
-文字列 enum メンバーは reverse mapping を生成しないことに注意してください。
+また、文字列 enum のメンバーは reverse mapping を生成しないことに注意してください。
 
 #### `const` enums
 
@@ -256,26 +256,26 @@ var nameOfA = Enum[a]; // "A"
 
 ```typescript
 const enum Enum {
-    A = 1,
-    B = A * 2
+  A = 1,
+  B = A * 2
 }
 ```
 
-`const` enums は定数 enum 式にのみ用い、通常の enums とは異なり、コンパイル時に完全に取り除かれます。また、const enums メンバーはインラインされます。これが計算値を持たない理由です。
+`const` enums は定数 enum 式にのみ用います。通常の enums とは異なり、コンパイル時に完全に取り除かれます。また、const enums メンバーはインラインされます。このために計算値を持ちません。
 
 ```typescript
 const enum Directions {
-    Up,
-    Down,
-    Left,
-    Right
+  Up,
+  Down,
+  Left,
+  Right
 }
 
 let directions = [
-    Directions.Up,
-    Directions.Down,
-    Directions.Left,
-    Directions.Right
+  Directions.Up,
+  Directions.Down,
+  Directions.Left,
+  Directions.Right
 ];
 ```
 
@@ -291,9 +291,9 @@ ambient enums はすでにある enum 型を宣言するために使用します
 
 ```typescript
 declare enum Enum {
-    A = 1,
-    B,
-    C = 2
+  A = 1,
+  B,
+  C = 2
 }
 ```
 
